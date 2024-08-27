@@ -29,6 +29,9 @@ builder.Services.AddSingleton<FileExtensionContentTypeProvider>();
 
 builder.Services.AddDbContext<CityInfoContext>();
 
+builder.Services.AddScoped<ICityInfoRepository, CityInfoRepository>();
+ 
+
 #if DEBUG
 builder.Services.AddTransient<IMailService, LocalMailService>();
 #else
