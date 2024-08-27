@@ -1,4 +1,6 @@
-﻿namespace CityInfoAPI.Models
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+
+namespace CityInfoAPI.Models
 {
     public class PointOfInterestDto
     {
@@ -7,5 +9,10 @@
         public string Name { get; set; } = string.Empty;
 
         public string Description { get; set; }
+
+        public static implicit operator CreatedAtRoute(PointOfInterestDto v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

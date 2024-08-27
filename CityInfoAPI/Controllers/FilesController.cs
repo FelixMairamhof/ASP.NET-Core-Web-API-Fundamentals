@@ -22,9 +22,13 @@ namespace CityInfoAPI.Controllers
             {
                 return NotFound();
             }
+            if (!_fileExtensionContentTypeProvider.TryGetContentType(pathToFile, out var contentType))
+            {
+                contentType = "application/octet-stream";
+            }
 
             var bytes = System.IO.File.ReadAllBytes(pathToFile);
-            return File(bytes, "text/plain", Path.GetFileName(pathToFile));
+            return File(bytes, contentType, Path.GetFileName(pathToFile));
         }
     }
 }
