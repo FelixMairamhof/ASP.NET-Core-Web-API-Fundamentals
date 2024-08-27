@@ -1,6 +1,8 @@
 using CityInfoAPI;
+using CityInfoAPI.DbContexts;
 using CityInfoAPI.Services;
 using Microsoft.AspNetCore.StaticFiles;
+using Microsoft.EntityFrameworkCore;
 using Serilog;
 using System.Threading.RateLimiting;
 
@@ -25,13 +27,16 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<FileExtensionContentTypeProvider>();
 
+builder.Services.AddDbContext<CityInfoContext>();
+
 #if DEBUG
 builder.Services.AddTransient<IMailService, LocalMailService>();
 #else
-builder.Serice.AddTransient<IMailService, CloudMailService>();
+builder.Services.AddTransient<IMailService, CloudMailService>();
 #endif
 
 builder.Services.AddSingleton<CitiesDataStore>();
+
 
 var app = builder.Build();
 if (!app.Environment.IsDevelopment())
