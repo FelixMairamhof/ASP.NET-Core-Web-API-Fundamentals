@@ -20,6 +20,6 @@ namespace CityInfoAPI.Services
 
         void DeletePointOfInterest ( PointOfInterest pointOfInterest );
 
-        Task<IEnumerable<City>> GetCitiesAsync(string? name);
+        Task<(IEnumerable<City>, PaginationMetadata)> GetCitiesAsync(string? name, string? searchQuery, int pageNumber = 1, int pageSize = 10);
     }
 }
