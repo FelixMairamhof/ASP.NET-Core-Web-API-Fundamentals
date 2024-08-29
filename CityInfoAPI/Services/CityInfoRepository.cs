@@ -94,5 +94,10 @@ namespace CityInfoAPI.Services
         {
             _context.PointOfInterest.Remove(pointOfInterest);
         }
+
+        public async Task<bool> CityNameMatchesCityId(string? cityName, int cityId)
+        {
+            return await _context.Cities.AnyAsync(c => c.Id == cityId && c.Name == cityName);
+        }
     }
 }
