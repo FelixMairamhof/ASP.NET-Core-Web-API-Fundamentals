@@ -79,15 +79,14 @@ namespace CityInfoAPI.Controllers
                {
                    cityId = cityId,
                    pointOfInterestId = createdPointOfInterestToReturn.Id
-               }, finalPointOfInterest
+               }, createdPointOfInterestToReturn
             );
 
         }
         [HttpPut("{pointOfInterestId}")]
-        public ActionResult UpdatePointOfInterest(int cityId, int pointOfInterestId, PointOfInterestForUpdateDto pointOfInterest)
+        public async Task <ActionResult> UpdatePointOfInterest(int cityId, int pointOfInterestId, PointOfInterestForUpdateDto pointOfInterest)
         {
-            var city = _citiesDataStore.Cities.FirstOrDefault(c => c.Id == cityId);
-            if (city == null)
+            if (!await _cityInfoRepository.CityExistsAsync(cityId))
             {
                 return NotFound();
             }
