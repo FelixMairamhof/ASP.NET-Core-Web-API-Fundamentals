@@ -4,11 +4,13 @@ using System.Reflection.Metadata.Ecma335;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using System.IdentityModel.Tokens.Jwt;
+using Asp.Versioning;
 
 namespace CityInfoAPI.Controllers
 {
-    [Route("api/auth")]
+    [Route("api/v{version.apiVersion}/auth")]
     [ApiController]
+    [ApiVersion(1)]
     public class AuthentificationController : ControllerBase
     {
         private readonly IConfiguration _configuration;
